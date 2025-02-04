@@ -87,7 +87,7 @@ public class AlexandruAdrian_Rotaru_Cine {
             }
         }
     }
-    
+
     // Menú con las diferentes opciones
     public static void Menu() {
         int opcion;
@@ -124,48 +124,69 @@ public class AlexandruAdrian_Rotaru_Cine {
                 }
                 System.out.print(sala1[i][j] + " ");
             }
-            System.out.println(); 
+            System.out.println();
         }
 
         // Imprimir números de butacas
-        System.out.print("   "); 
-        for (int j = 0; j < sala1[0].length; j++) {
-            if (j == mitadSala1 - 1) {
-                System.out.print("   "); 
-            } else if (j < mitadSala1 - 1) {
-                System.out.print((j + 1) + " ");
-            }else{
-                System.out.print(j + " ");
+        System.out.print("   ");
+        for (int j = 1; j < sala1[0].length; j++) {
+            if (j == mitadSala1) {
+                System.out.print("   ");
+            }
+            System.out.print(j % 10 + " ");
+        }
+
+        //imprimir decenas
+        System.out.println();
+        System.out.print("   ");
+        for (int j = 1; j <= sala1[0].length; j++) {
+            if (j == mitadSala1) {
+                System.out.print("   ");
+            }
+            if (j >= 10 && j % 10 == 0) {
+                System.out.print(j / 10 + " ");
+            } else {
+                System.out.print("  ");
             }
         }
-        System.out.println("\n");
 
         // Mostrar sala 2
-        System.out.println("SALA 2 -> " + pelicula2);
+        System.out.println("\n SALA 2 -> " + pelicula2);
         for (int i = 0; i < sala2.length; i++) {
             // Imprimir número de fila
             System.out.printf("%2d ", i + 1);
             for (int j = 0; j < sala2[i].length; j++) {
                 if (j == mitadSala2 - 1) {
-                    System.out.print("  "); 
+                    System.out.print("  ");
                 }
                 System.out.print(sala2[i][j] + " ");
             }
-            System.out.println(); 
+            System.out.println();
         }
 
         // Imprimir números de butacas
-        System.out.print("   "); 
-        for (int j = 0; j < sala2[0].length; j++) {
-            if (j == mitadSala2 - 1) {
-                System.out.print("   "); 
-            } else if (j < mitadSala2 - 1) {
-                System.out.print((j + 1) + " ");
-            }else{
-                System.out.print(j + " ");
+        System.out.print("   ");
+        for (int j = 1; j < sala2[0].length; j++) {
+            if (j == mitadSala2) {
+                System.out.print("    ");
+            }
+            System.out.print(j % 10 + " ");
+        }
+
+        //imprimir decenas
+        System.out.println();
+        System.out.print("   ");
+        for (int j = 1; j <= sala2[0].length; j++) {
+            if (j == mitadSala2) {
+                System.out.print("    ");
+            }
+            if (j >= 10 && j % 10 == 0) {
+                System.out.print(j / 10 + " ");
+            } else {
+                System.out.print("  ");
             }
         }
-        System.out.println("\n");
+        System.out.println();
         System.out.println();
     }
 
