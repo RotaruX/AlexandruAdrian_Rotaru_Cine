@@ -87,7 +87,7 @@ public class AlexandruAdrian_Rotaru_Cine {
             }
         }
     }
-
+    
     // Menú con las diferentes opciones
     public static void Menu() {
         int opcion;
@@ -120,20 +120,22 @@ public class AlexandruAdrian_Rotaru_Cine {
             System.out.printf("%2d ", i + 1);
             for (int j = 0; j < sala1[i].length; j++) {
                 if (j == mitadSala1 - 1) {
-                    System.out.print("  "); // Espacio para el pasillo
+                    System.out.print(" ");
                 }
                 System.out.print(sala1[i][j] + " ");
             }
-            System.out.println(); // Salto de línea al terminar la fila
+            System.out.println(); 
         }
 
         // Imprimir números de butacas
-        System.out.print("   "); // Espaciado inicial para alinearlos
+        System.out.print("   "); 
         for (int j = 0; j < sala1[0].length; j++) {
             if (j == mitadSala1 - 1) {
-                System.out.print("   "); // Espacio vacío para el pasillo
-            } else {
+                System.out.print("   "); 
+            } else if (j < mitadSala1 - 1) {
                 System.out.print((j + 1) + " ");
+            }else{
+                System.out.print(j + " ");
             }
         }
         System.out.println("\n");
@@ -145,22 +147,25 @@ public class AlexandruAdrian_Rotaru_Cine {
             System.out.printf("%2d ", i + 1);
             for (int j = 0; j < sala2[i].length; j++) {
                 if (j == mitadSala2 - 1) {
-                    System.out.print("  "); // Espacio para el pasillo
+                    System.out.print("  "); 
                 }
                 System.out.print(sala2[i][j] + " ");
             }
-            System.out.println(); // Salto de línea al terminar la fila
+            System.out.println(); 
         }
 
         // Imprimir números de butacas
-        System.out.print("   "); // Espaciado inicial para alinearlos
+        System.out.print("   "); 
         for (int j = 0; j < sala2[0].length; j++) {
             if (j == mitadSala2 - 1) {
-                System.out.print("   "); // Espacio vacío para el pasillo
-            } else {
+                System.out.print("   "); 
+            } else if (j < mitadSala2 - 1) {
                 System.out.print((j + 1) + " ");
+            }else{
+                System.out.print(j + " ");
             }
         }
+        System.out.println("\n");
         System.out.println();
     }
 
