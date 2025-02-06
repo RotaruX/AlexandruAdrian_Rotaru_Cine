@@ -12,6 +12,9 @@ import java.util.Scanner;
 public class AlexandruAdrian_Rotaru_Cine {
 
     static Scanner sc = new Scanner(System.in);
+    static LocalDate fecha = LocalDate.now();
+    static DateTimeFormatter ESP = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+    static String fechaActual = fecha.format(ESP);
     static char[][] sala1;
     static char[][] sala2;
     static String pelicula1, pelicula2;
@@ -30,9 +33,7 @@ public class AlexandruAdrian_Rotaru_Cine {
 
     //Muestra la fecha de hoy
     public static void Fecha() {
-        LocalDate fecha = LocalDate.now();
-        DateTimeFormatter ESP = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
-        String fechaActual = fecha.format(ESP);
+
         System.out.println(fechaActual);
         System.out.println("Sesión 22:30");
         System.out.println();
@@ -45,11 +46,17 @@ public class AlexandruAdrian_Rotaru_Cine {
         do {
             System.out.print("Número de filas: -> ");
             filas = sc.nextInt();
+            if (filas <= 0){
+                System.out.println("Debe haber minimo 1 fila");
+            }
         } while (filas <= 0);
         do {
             System.out.print("Butacas por filas: -> ");
-            butacas = sc.nextInt() + 1;
-        } while (butacas <= 1 || butacas % 2 == 0);
+            butacas = sc.nextInt();
+            if (butacas <= 1 || butacas % 2 != 0){
+                System.out.println("Debe haber minimo 2 butacas y debe ser par ");
+            }
+        } while (butacas <= 2 || butacas % 2 != 0);
         sc.nextLine();
         if (i == 1) {
             System.out.print("Pelicula de la Sala 1: ");
@@ -69,21 +76,13 @@ public class AlexandruAdrian_Rotaru_Cine {
     public static void Rellenar() {
         for (int i = 0; i < sala1.length; i++) {
             for (int j = 0; j < sala1[i].length; j++) { // Cambiado i++ por j++
-                if (j == mitadSala1 - 1) {
-                    sala1[i][j] = ' '; // Pasillo central
-                } else {
-                    sala1[i][j] = '_'; // Butacas disponibles
-                }
+                sala1[i][j] = '_'; // Pasillo central
             }
         }
 
         for (int i = 0; i < sala2.length; i++) {
             for (int j = 0; j < sala2[i].length; j++) { // Cambiado i++ por j++
-                if (j == mitadSala2 - 1) {
-                    sala2[i][j] = ' '; // Pasillo central
-                } else {
-                    sala2[i][j] = '_'; // Butacas disponibles
-                }
+                    sala2[i][j] = '_';
             }
         }
     }
@@ -101,19 +100,21 @@ public class AlexandruAdrian_Rotaru_Cine {
             } while (opcion != 1 && opcion != 2 && opcion != 0);
 
             switch (opcion) {
-                case 1 ->
-                    Mostrar();
-                case 2 ->
+                case 1:
+                    MostrarSala1();
+                    MostrarSala2();
+                    break;
+                case 2:
                     Vender();
-                case 0 ->
+                    break;
+                case 0:
                     System.out.println("Final del programa");
+                    break;
             }
         } while (opcion != 0);
     }
 
-    // Opción mostrar salas
-    public static void Mostrar() {
-        // Mostrar sala 1
+    public static void MostrarSala1() {
         System.out.println("SALA 1 -> " + pelicula1);
         for (int i = 0; i < sala1.length; i++) {
             // Imprimir número de fila
@@ -129,11 +130,11 @@ public class AlexandruAdrian_Rotaru_Cine {
 
         // Imprimir números de butacas
         System.out.print("   ");
-        for (int j = 1; j < sala1[0].length; j++) {
+        for (int j = 1; j <= sala1[0].length; j++) {
             if (j == mitadSala1) {
-                System.out.print("   ");
+                System.out.print(" ");
             }
-            System.out.print(j % 10 + " ");
+            System.out.print(j % 10+ " ");
         }
 
         //imprimir decenas
@@ -141,7 +142,7 @@ public class AlexandruAdrian_Rotaru_Cine {
         System.out.print("   ");
         for (int j = 1; j <= sala1[0].length; j++) {
             if (j == mitadSala1) {
-                System.out.print("   ");
+                System.out.print(" ");
             }
             if (j >= 10 && j % 10 == 0) {
                 System.out.print(j / 10 + " ");
@@ -149,7 +150,11 @@ public class AlexandruAdrian_Rotaru_Cine {
                 System.out.print("  ");
             }
         }
+        System.out.println();
+    }
 
+    // Opción mostrar salas
+    public static void MostrarSala2() {
         // Mostrar sala 2
         System.out.println("\n SALA 2 -> " + pelicula2);
         for (int i = 0; i < sala2.length; i++) {
@@ -157,7 +162,7 @@ public class AlexandruAdrian_Rotaru_Cine {
             System.out.printf("%2d ", i + 1);
             for (int j = 0; j < sala2[i].length; j++) {
                 if (j == mitadSala2 - 1) {
-                    System.out.print("  ");
+                    System.out.print(" ");
                 }
                 System.out.print(sala2[i][j] + " ");
             }
@@ -166,9 +171,9 @@ public class AlexandruAdrian_Rotaru_Cine {
 
         // Imprimir números de butacas
         System.out.print("   ");
-        for (int j = 1; j < sala2[0].length; j++) {
+        for (int j = 1; j <= sala2[0].length; j++) {
             if (j == mitadSala2) {
-                System.out.print("    ");
+                System.out.print(" ");
             }
             System.out.print(j % 10 + " ");
         }
@@ -178,7 +183,7 @@ public class AlexandruAdrian_Rotaru_Cine {
         System.out.print("   ");
         for (int j = 1; j <= sala2[0].length; j++) {
             if (j == mitadSala2) {
-                System.out.print("    ");
+                System.out.print(" ");
             }
             if (j >= 10 && j % 10 == 0) {
                 System.out.print(j / 10 + " ");
@@ -192,6 +197,72 @@ public class AlexandruAdrian_Rotaru_Cine {
 
     //Venta de entrada
     public static void Vender() {
+        int sala, fila, butaca;
+        System.out.println("Venta de entradas");
+        do {
+            System.out.print("Introduce sala: ");
+            sala = sc.nextInt();
+            if (sala > 2 || sala < 1){
+                System.out.println("Sala inexistente");
+            }
+        } while (sala > 2 || sala < 1);
 
+        if (sala == 1) {
+            MostrarSala1();
+            do {
+                System.out.print("Fila-> ");
+                fila = sc.nextInt();
+                if (fila > sala1.length){
+                    System.out.println("Hay " + sala1.length + " filas");
+                }
+            } while (fila > sala1.length);
+            fila--;
+            do {
+                System.out.print("Butaca-> ");
+                butaca = sc.nextInt();
+                if (butaca > sala1[fila].length){
+                    System.out.println("Hay " + sala1[fila].length + " butacas");
+                }
+            } while (butaca > sala1[fila].length);
+            butaca--;
+
+            if (sala1[fila][butaca] != 'X') {
+                sala1[fila][butaca] = 'X';
+                System.out.println();
+                System.out.println();
+                System.out.println("Sala 1 " + pelicula1);
+                System.out.println(fechaActual + " Sesión 22:30");
+                System.out.println("Fila " + (fila + 1) + " Butaca " + (butaca + 1));
+                System.out.println();
+            } else {
+                System.out.println("Butaca ocupada");
+            }
+        } else {
+            MostrarSala2();
+            //Pedimos fila y butaca
+            do {
+                System.out.print("Fila-> ");
+                fila = sc.nextInt();
+            } while (fila > sala2.length);
+            fila--;
+            do {
+                System.out.print("Butaca-> ");
+                butaca = sc.nextInt();
+            } while (butaca > sala2[fila].length);
+            butaca--;
+            
+            //Comprobamos y cambiamos el contenido del array
+            if (sala2[fila][butaca] != 'X') {
+                sala2[fila][butaca] = 'X';
+                System.out.println();
+                System.out.println();
+                System.out.println("Sala 2 " + pelicula2);
+                System.out.println(fechaActual + " Sesión 22:30");
+                System.out.println("Fila " + (fila + 1) + " Butaca " + (butaca + 1));
+                System.out.println();
+            } else {
+                System.out.println("Butaca ocupada");
+            }
+        }
     }
 }
